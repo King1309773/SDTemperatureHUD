@@ -1,0 +1,17 @@
+.gradle/
+.tools/
+build/
+run/
+logs/
+.idea/
+.vscode/
+*.iml
+*.log
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+!reference/sdtemperaturehud-1.2.1.jar
+*.zip
+libs/*.jar
+.env
+.env.*
+!.env.example

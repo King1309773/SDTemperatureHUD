@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.0.197'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+
+version = project.modVersion
+group = 'dev.rlcraftceaddons'
+archivesBaseName = 'sdtemperaturehud'
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(org.gradle.api.tasks.bundling.AbstractArchiveTask) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+minecraft {
+    mappings channel: 'stable', version: '39-1.12'
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs', 'reference'
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+    implementation fg.deobf('local:SimpleDifficulty-1.12.2:0.3.9')
+    compileOnly fg.deobf('local:xaerolib-forge-1.12.2:1.7.3')
+    compileOnly fg.deobf('local:xaerominimap-forge-1.12.2:26.6.0')
+    compileOnly fg.deobf('local:xaeroworldmap-forge-1.12.2:1.47.0')
+    testImplementation 'junit:junit:4.12'
+    testImplementation fg.deobf('local:xaerolib-forge-1.12.2:1.7.3')
+    testImplementation fg.deobf('local:xaerominimap-forge-1.12.2:26.6.0')
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand version: project.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+def stagedReobfuscatedJar = file("$buildDir/reproducible/${archivesBaseName}-${version}-reobfuscated.jar")
+
+task stageReobfuscatedJar(type: Copy) {
+    dependsOn 'reobfJar'
+    from { jar.archivePath }
+    into stagedReobfuscatedJar.parentFile
+    rename { stagedReobfuscatedJar.name }
+}
+
+task reproducibleReobfuscatedJar(type: Zip) {
+    dependsOn stageReobfuscatedJar
+    from { zipTree(stagedReobfuscatedJar) }
+    destinationDir = jar.destinationDir
+    archiveName = jar.archiveName
+}
+
+assemble.dependsOn reproducibleReobfuscatedJar
