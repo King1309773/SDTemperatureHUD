@@ -36,4 +36,37 @@ public class TemperatureBreakdownAccumulatorCharacterizationTest {
         assertSame(TemperatureModifierCategory.OTHER, TemperatureModifierCategory.forName("unknown"));
         assertSame(TemperatureModifierCategory.OTHER, TemperatureModifierCategory.forName(null));
     }
+
+    @Test
+    public void sprintHasItsOwnHintSourceButKeepsTheOriginalAnalysisTotal() {
+        assertSame(TemperatureModifierCategory.MOVEMENT, TemperatureModifierCategory.forName("sPrInT"));
+        TemperatureBreakdownAccumulator accumulator = new TemperatureBreakdownAccumulator();
+        accumulator.add(TemperatureModifierCategory.ENVIRONMENT, 10);
+        accumulator.add(TemperatureModifierCategory.forName("Sprint"), 3);
+        accumulator.add(TemperatureModifierCategory.OTHER, -7);
+        TemperatureBreakdown result = accumulator.finish(6);
+        assertEquals(-4, result.getOther());
+        assertEquals(6, result.sum());
+        assertEquals(3, result.getMovementForHints());
+        assertEquals(-7, result.getOtherForHints());
+    }
+
+    @Test
+    public void targetClampingDoesNotLeakMovementIntoOtherHints() {
+        TemperatureBreakdownAccumulator accumulator = new TemperatureBreakdownAccumulator();
+        accumulator.add(TemperatureModifierCategory.ENVIRONMENT, 30);
+        accumulator.add(TemperatureModifierCategory.MOVEMENT, 3);
+        TemperatureBreakdown result = accumulator.finish(25);
+        assertEquals(-5, result.getOther());
+        assertEquals(25, result.sum());
+        assertEquals(3, result.getMovementForHints());
+        assertEquals(0, result.getOtherForHints());
+    }
+
+    @Test
+    public void oldBreakdownConstructorKeepsItsHintContributions() {
+        TemperatureBreakdown result = new TemperatureBreakdown(10, 0, 0, 0, -2, 8);
+        assertEquals(0, result.getMovementForHints());
+        assertEquals(-2, result.getOtherForHints());
+    }
 }

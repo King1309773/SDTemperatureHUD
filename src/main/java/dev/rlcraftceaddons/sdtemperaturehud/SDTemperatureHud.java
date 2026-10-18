@@ -26,12 +26,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid="sdtemperaturehud", name="SimpleDifficulty Temperature HUD", version="1.6.0", dependencies="required-after:simpledifficulty@[0.3.9]", acceptableRemoteVersions="*", clientSideOnly=true, guiFactory="dev.rlcraftceaddons.sdtemperaturehud.client.config.SDTemperatureHudGuiFactory")
+@Mod(modid="sdtemperaturehud", name="SimpleDifficulty Temperature HUD", version="1.6.1", dependencies="required-after:simpledifficulty@[0.3.9]", acceptableRemoteVersions="*", clientSideOnly=true, guiFactory="dev.rlcraftceaddons.sdtemperaturehud.client.config.SDTemperatureHudGuiFactory")
 @SideOnly(value=Side.CLIENT)
 public final class SDTemperatureHud {
     public static final String MODID = "sdtemperaturehud";
     public static final String NAME = "SimpleDifficulty Temperature HUD";
-    public static final String VERSION = "1.6.0";
+    public static final String VERSION = "1.6.1";
     public static final Logger LOGGER = LogManager.getLogger((String)"sdtemperaturehud");
     private static volatile TemperatureSnapshotProvider snapshotProvider;
 

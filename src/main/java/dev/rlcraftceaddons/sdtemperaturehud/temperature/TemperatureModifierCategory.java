@@ -10,6 +10,7 @@ public enum TemperatureModifierCategory {
     EQUIPMENT,
     SEASON,
     HEAT_SOURCE,
+    MOVEMENT,
     OTHER;
 
 
@@ -40,6 +41,9 @@ public enum TemperatureModifierCategory {
             }
             case "blockstiles": {
                 return HEAT_SOURCE;
+            }
+            case "sprint": {
+                return MOVEMENT;
             }
         }
         return OTHER;

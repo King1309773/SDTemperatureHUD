@@ -2,7 +2,7 @@
 
 Minecraft 1.12.2 的 SimpleDifficulty 客户端温度 HUD 附属模组。作者：**KingJJ**。
 
-[下载正式版](https://github.com/King1309773/SDTemperatureHUD/releases/latest) · [1.6.0 更新说明](CHANGELOG.md) · [反馈问题](https://github.com/King1309773/SDTemperatureHUD/issues)
+[下载正式版](https://github.com/King1309773/SDTemperatureHUD/releases/latest) · [1.6.1 更新说明](CHANGELOG.md) · [反馈问题](https://github.com/King1309773/SDTemperatureHUD/issues)
 
 ## 功能
 
@@ -11,6 +11,7 @@ Minecraft 1.12.2 的 SimpleDifficulty 客户端温度 HUD 附属模组。作者�
 - 两级温度预警：接近危险时慢速脉冲，危险时快速闪烁；提示音默认关闭，可单独开启。
 - 游戏内布局编辑、独立缩放、颜色主题、显示项目和外观即时预览。
 - 中文配置，常用 / 外观 / 提示 / 高级四页。
+- 移动影响变化提示独立限频：至少间隔 30 秒游戏活动时间，冷却中不刷新、不补发；热源、装备等其他来源不受这项限制。
 - 可选 Xaero 联动：小地图原生“群系基础温度”信息项，以及大地图顶部群系名称后的彩色温度。
 
 地图温度是 SimpleDifficulty 客户端规则下的**群系基础参考值（0–25）**，不是摄氏度、当前体温或目标温度，不包括季节、天气、海拔、装备和附近热源等修正。多人服务器的实际规则可能与客户端不同。
@@ -19,7 +20,7 @@ Minecraft 1.12.2 的 SimpleDifficulty 客户端温度 HUD 附属模组。作者�
 
 需要 Minecraft **1.12.2**、Forge 和 **SimpleDifficulty 0.3.9**。发行构建基于 Forge **14.23.5.2860** / Java 8。
 
-1. 从 Releases 下载 `sdtemperaturehud-1.6.0.jar`。
+1. 从 Releases 下载 `sdtemperaturehud-1.6.1.jar`。
 2. 退出游戏，将 JAR 放入对应实例的 `mods` 文件夹。
 3. 升级时移出旧版或实验版 JAR，只保留一个版本；可以保留原配置，建议先备份。
 
@@ -69,17 +70,19 @@ Linux / macOS：
 sh gradlew build
 ```
 
-首次构建需要联网下载 Gradle、Forge 和测试依赖；缓存完整后可以添加 `--offline`。输出为 `build/libs/sdtemperaturehud-1.6.0.jar`。Xaero 构建依赖不会打包进发行 JAR。
+首次构建需要联网下载 Gradle、Forge 和测试依赖；缓存完整后可以添加 `--offline`。输出为 `build/libs/sdtemperaturehud-1.6.1.jar`。Xaero 构建依赖不会打包进发行 JAR。
 
 `reference/sdtemperaturehud-1.2.1.jar` 是本模组自身的历史回归测试样本，仅供测试，不应安装或与新版同时放入 mods。测试也包含原生 Xaero 信息管理器的无界面回归，但不代替游戏内渲染验收。
 
-## 1.6.0 文件校验
+## 1.6.1 文件校验
 
 SHA-256：
 
 ```text
-84805C39292E0351838F28F6E513A4E6A3D231F888CAAB90F222217D8EBBF77C  sdtemperaturehud-1.6.0.jar
+9EEEA225DDD363EAD943268160489FFBA73CFC226E1BF28AD20919199ED3E615  sdtemperaturehud-1.6.1.jar
 ```
+
+1.6.1 发布前重新构建，75 个测试套件、284 项测试全部通过，失败、错误、跳过均为 0；构建包与此前提供的 1.6.1 移动提示修复测试包逐字节相同。自动测试与源码审查不等于已完成真实游戏画面验收；1.6.1 的游戏内验证仍待进行。
 
 ## 反馈
 

@@ -29,7 +29,7 @@ public class BaselineMetadataTest {
     public void rejectsModidNestedOutsideTheModidField() {
         String misleadingJson = "[{\n" +
                 "  \"modid\": \"not-sdtemperaturehud\",\n" +
-                "  \"version\": \"1.6.0\",\n" +
+                "  \"version\": \"1.6.1\",\n" +
                 "  \"authorList\": [\"KingJJ\"],\n" +
                 "  \"dependencies\": [\"simpledifficulty\"],\n" +
                 "  \"nested\": {\"modid\": \"sdtemperaturehud\"}\n" +
@@ -42,7 +42,7 @@ public class BaselineMetadataTest {
     public void rejectsAuthorOutsideAuthorList() {
         String misleadingJson = "[{\n" +
                 "  \"modid\": \"sdtemperaturehud\",\n" +
-                "  \"version\": \"1.6.0\",\n" +
+                "  \"version\": \"1.6.1\",\n" +
                 "  \"authorList\": [\"Someone Else\"],\n" +
                 "  \"dependencies\": [\"simpledifficulty\"],\n" +
                 "  \"credits\": \"KingJJ\"\n" +
@@ -55,7 +55,7 @@ public class BaselineMetadataTest {
     public void rejectsDependencyOutsideDependencies() {
         String misleadingJson = "[{\n" +
                 "  \"modid\": \"sdtemperaturehud\",\n" +
-                "  \"version\": \"1.6.0\",\n" +
+                "  \"version\": \"1.6.1\",\n" +
                 "  \"authorList\": [\"KingJJ\"],\n" +
                 "  \"dependencies\": [\"anothermod\"],\n" +
                 "  \"description\": \"simpledifficulty\"\n" +
@@ -81,8 +81,8 @@ public class BaselineMetadataTest {
         JsonObject metadata = mods.get(0).getAsJsonObject();
         assertEquals("modid must remain sdtemperaturehud",
                 "sdtemperaturehud", metadata.get("modid").getAsString());
-        assertEquals("release metadata must carry version 1.6.0",
-                "1.6.0", metadata.get("version").getAsString());
+        assertEquals("release metadata must carry version 1.6.1",
+                "1.6.1", metadata.get("version").getAsString());
         assertTrue("authorList must contain KingJJ",
                 containsString(metadata.getAsJsonArray("authorList"), "KingJJ"));
         assertTrue("dependencies must contain simpledifficulty",

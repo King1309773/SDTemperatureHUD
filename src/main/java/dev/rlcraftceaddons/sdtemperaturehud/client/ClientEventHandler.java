@@ -121,7 +121,7 @@ public final class ClientEventHandler {
                     Math.max(1, HudConfig.changeHintThreshold),
                     Math.max(1, Math.min(10, HudConfig.changeHintDurationSeconds)) * 1000);
             } else {
-                this.changeTracker.reset();
+                this.changeTracker.suspend();
             }
             if (snapshot != null) {
                 TemperatureWarningLevel level = warningLevelForSound(snapshot);
@@ -133,7 +133,7 @@ public final class ClientEventHandler {
                 }
             }
         }
-        if (this.minecraft.currentScreen != null) this.changeTracker.reset();
+        if (this.minecraft.currentScreen != null) this.changeTracker.suspend();
         this.editorLauncher.consumeAndOpen();
     }
 

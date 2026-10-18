@@ -15,13 +15,13 @@ public class RecoveryBuildIdentityTest {
     public void releaseVersionIsDeclaredByBuildAndSourceMetadata() throws IOException {
         Path root = Paths.get(System.getProperty("user.dir")).toAbsolutePath().normalize();
         String properties = new String(Files.readAllBytes(root.resolve("gradle.properties")), StandardCharsets.UTF_8);
-        assertTrue(properties.contains("modVersion=1.6.0"));
+        assertTrue(properties.contains("modVersion=1.6.1"));
 
         Path modClass = root.resolve("src/main/java/dev/rlcraftceaddons/sdtemperaturehud/SDTemperatureHud.java");
         assertTrue("SDTemperatureHud.java must exist", Files.isRegularFile(modClass));
         String source = new String(Files.readAllBytes(modClass), StandardCharsets.UTF_8);
-        assertTrue(source.contains("version=\"1.6.0\""));
-        assertTrue(source.contains("public static final String VERSION = \"1.6.0\""));
+        assertTrue(source.contains("version=\"1.6.1\""));
+        assertTrue(source.contains("public static final String VERSION = \"1.6.1\""));
         assertTrue(source.contains("dependencies=\"required-after:simpledifficulty@[0.3.9]\""));
         assertTrue(source.contains("acceptableRemoteVersions=\"*\""));
         assertTrue(source.contains("clientSideOnly=true"));

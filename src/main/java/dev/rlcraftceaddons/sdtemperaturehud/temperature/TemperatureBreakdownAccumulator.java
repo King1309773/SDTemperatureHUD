@@ -35,7 +35,9 @@ public final class TemperatureBreakdownAccumulator {
         current = (int)(cumulative += this.totals.get((Object)TemperatureModifierCategory.HEAT_SOURCE).floatValue());
         int heatSource = current - previous;
         int other = target - current;
-        return new TemperatureBreakdown(environment, equipment, season, heatSource, other, target);
+        return new TemperatureBreakdown(environment, equipment, season, heatSource, other, target,
+            (int)this.totals.get(TemperatureModifierCategory.MOVEMENT).floatValue(),
+            (int)this.totals.get(TemperatureModifierCategory.OTHER).floatValue());
     }
 }
 
